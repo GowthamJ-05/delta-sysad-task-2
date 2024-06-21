@@ -1,0 +1,22 @@
+services:
+  backend:
+    build:
+      context: backend
+    env_file:
+      - backend.env
+      - common.env
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    restart: unless-stopped
+  db:
+    image: mysql:latest
+    env_file:
+      - common.env
+    volumes:
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+      - db-data:/var/lib/mysql
+    restart: always
+volumes:
+  db-data:
