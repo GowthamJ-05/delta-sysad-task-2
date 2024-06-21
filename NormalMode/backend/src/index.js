@@ -89,7 +89,7 @@ async function updateMenteeDomain() {
 async function Completion(file){
     return new Promise((res,rej)=>{
         let mentee_rollno=file.split('/')[4].split('_')[1]
-    //task_completed.txt
+        
         fs.readFile(`${file}/task_completed.txt`,"utf-8",async (err,contents)=>{
             if (contents == undefined){
                 res()
@@ -142,14 +142,13 @@ async function Submission(file) {
     return new Promise(async (res,rej)=>{
     
             let mentee_rollno=file.split('/')[4].split('_')[1]
-             //task_submitted.txt
+
             fs.readFile(`${file}/task_submitted.txt`,"utf-8",async (err,contents)=>{
                 if (contents == undefined){
                     res()
                     return
                 }
     
-                //creating tasksObject
                 const lines = contents.split('\n')
                 const tasksObject = {}
                 let currentDomain = ''
