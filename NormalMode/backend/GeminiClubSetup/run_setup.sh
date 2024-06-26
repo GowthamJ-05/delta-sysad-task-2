@@ -1,4 +1,5 @@
 #!/bin/bash
+#This is the start of the program
 
 setupfunc ()
 {
@@ -39,10 +40,12 @@ setupfunc ()
 
     # Permissions to mentee_domain.txt
     chmod 700 /home/core/$3
-    setfacl -m g:sudo:rwx /home/core/$3
 
     # Change core's shell from sh to bash
     usermod -s /bin/bash core
+    
+    # Add alias files to .bashrc file of core
+    (cat "/code/GeminiClubSetup/mentorAllocation_alias.sh" ; cat "/code/GeminiClubSetup/displayStatus_alias.sh") >> /home/core/.bashrc
 
     # Mentee users creation and permission
     mentee_list=$(awk 'BEGIN{OFS="_"} $0 !~/Name RollNo/{print $1,$2}' $2)
@@ -84,8 +87,8 @@ setupfunc ()
         setfacl -m u:$mentee:--x /
         setfacl -m u:$mentee:--x /home
 
-        # Add domainPref_alias.sh to .bashrc of $mentee
-        cat "/code/GeminiClubSetup/domainPref_alias.sh" >> /home/core/mentees/$mentee/.bashrc
+        # Add alias files to .bashrc of $mentee
+        (cat "/code/GeminiClubSetup/domainPref_alias.sh" ; cat "/code/GeminiClubSetup/submitTask_alias.sh" ) >> /home/core/mentees/$mentee/.bashrc
     done
 
     # Mentors users creation and permission
@@ -122,7 +125,7 @@ setupfunc ()
         setfacl -m g::0 /home/core/mentors/Webdev/$mentor
         
         # Restrict the others access to $mentor
-        setfacl -m o::0 /home/core/mentors//Webdev/$mentor
+        setfacl -m o::0 /home/core/mentors/Webdev/$mentor
     
         # Change the mentor's shell from sh to bash
         usermod -s /bin/bash $mentor
@@ -137,6 +140,9 @@ setupfunc ()
         # Deny $mentee the read permissions of / and /home
         setfacl -m u:$mentor:--x /
         setfacl -m u:$mentor:--x /home
+        
+        # Add alias files to .bashrc file of $mentor
+        cat "/code/GeminiClubSetup/submitTask_alias.sh" >> /home/core/mentors/Webdev/$mentor/.bashrc
 
     done
 
@@ -187,6 +193,9 @@ setupfunc ()
         # Deny $mentor the read permissions of / and /home
         setfacl -m u:$mentor:--x /
         setfacl -m u:$mentor:--x /home
+        
+        # Add alias files to .bashrc file of $mentor
+        cat "/code/GeminiClubSetup/submitTask_alias.sh" >> /home/core/mentors/Appdev/$mentor/.bashrc
 
     done
 
@@ -236,6 +245,9 @@ setupfunc ()
         # Deny $mentor the read permissions of / and /home
         setfacl -m u:$mentor:--x /
         setfacl -m u:$mentor:--x /home
+        
+        # Add alias files to .bashrc file of $mentor
+        cat "/code/GeminiClubSetup/submitTask_alias.sh" >> /home/core/mentors/Sysad/$mentor/.bashrc
 
     done
 
@@ -244,4 +256,4 @@ setupfunc ()
 }
 
 
-setupfunc /code/GeminiClubSetup/mentor_details.txt /code/GeminiClubSetup/mentee_details.txt mentee_domain.txt    
+setupfunc /code/GeminiClubSetup/mentor_details.txt /code/GeminiClubSetup/mentee_details.txt mentee_domain.txt 
