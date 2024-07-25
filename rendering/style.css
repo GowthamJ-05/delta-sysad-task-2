@@ -1,0 +1,64 @@
+*{
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+body{
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap:5vh;
+}
+
+#login{
+    color: chartreuse;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+}
+
+#login b{
+    font-size: x-large;
+}
+
+h1{
+    margin:0vh;
+}
+
+
+#container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80vw;
+    height: max-content;
+    gap:10vw;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 3vh
+}
+
+.component{
+    background-color: chartreuse;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    width: 25vw;
+    height: 6vw;
+    border-radius: 1rem;
+    flex-direction: column;
+    gap: 2vh;
+    padding: 1vh;
+}
+
+.component div.domain{
+    font-size: 0.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    gap:1vh
+}
